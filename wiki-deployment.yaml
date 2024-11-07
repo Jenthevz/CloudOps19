@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikijs
+  labels:
+    app: wikijs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikijs
+  template:
+    metadata:
+      labels:
+        app: wikijs
+    spec:
+      containers:
+      - name: wikijs
+        image: requarks/wiki:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_TYPE
+          value: "mysql"
+        - name: DB_HOST
+          value: "mysql"  # Matches MySQL service name
+        - name: DB_PORT
+          value: "3306"   # Matches MySQL service port
+        - name: DB_USER
+          value: "wikiuser"  # MySQL user
+        - name: DB_PASS
+          value: "wikipassword"  # MySQL password
+        - name: DB_NAME
+          value: "wikidb"   # MySQL database
+        - name: DB_SSL
+          value: "false"   # Disable SSL if not using it
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
