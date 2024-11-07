@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: wiki.cloudops-19.ucll.cloud
+  - host: wiki.cloudops-argo-19.ucll.cloud
     http:
       paths:
       - path: /
